@@ -1,0 +1,882 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Diagnóstico gratuito: mide el pulso de tu negocio en 4 áreas y recibe un plan de acción. Por Kleyi Elimar, Consultoría de Negocios.">
+<meta property="og:title" content="Midamos el Pulso de tu Negocio | Kleyi Elimar">
+<meta property="og:description" content="4 áreas, 16 preguntas y un plan de acción claro para poner orden en tu negocio.">
+<meta property="og:type" content="website">
+<title>Midamos el pulso de tu negocio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap">
+<style>
+
+  /* ============ TOKENS ============ */
+  :root{
+    color-scheme: light;
+    --c-bg: #EAEAEA;
+    --c-surface: #FFFFFF;
+    --c-surface-alt: #E1E7E5;
+    --c-text: #2C3E35;
+    --c-text-muted: #5C716B;
+    --c-border: rgba(44,62,53,0.12);
+    --c-brand-deep: #45625D;
+    --c-brand-mid: #6AA5A9;
+    --c-brand-pale: #A3D2D5;
+    --c-warn: #B07A45;
+    --c-warn-soft: #EEDFCB;
+    --c-on-brand: #FDFEFE;
+    --shadow-card: 0 1px 2px rgba(44,62,53,0.06), 0 8px 24px -12px rgba(44,62,53,0.2);
+    --font-display: 'Anton', 'Arial Narrow', sans-serif;
+    --font-body: 'Montserrat', system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --c-bg: #101C19;
+      --c-surface: #16241F;
+      --c-surface-alt: #1D2E28;
+      --c-text: #E8F0ED;
+      --c-text-muted: #92A9A2;
+      --c-border: rgba(163,210,213,0.16);
+      --c-brand-deep: #8FC4BD;
+      --c-brand-mid: #6AA5A9;
+      --c-brand-pale: #3E5B56;
+      --c-warn: #E3A462;
+      --c-warn-soft: #3B2E1C;
+      --c-on-brand: #0E1A17;
+      --shadow-card: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
+    }
+  }
+  :root[data-theme="dark"]{
+    --c-bg: #101C19;
+    --c-surface: #16241F;
+    --c-surface-alt: #1D2E28;
+    --c-text: #E8F0ED;
+    --c-text-muted: #92A9A2;
+    --c-border: rgba(163,210,213,0.16);
+    --c-brand-deep: #8FC4BD;
+    --c-brand-mid: #6AA5A9;
+    --c-brand-pale: #3E5B56;
+    --c-warn: #E3A462;
+    --c-warn-soft: #3B2E1C;
+    --c-on-brand: #0E1A17;
+    --shadow-card: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
+  }
+
+  *{ box-sizing: border-box; }
+  body{
+    margin:0;
+    background: var(--c-bg);
+    color: var(--c-text);
+    font-family: var(--font-body);
+    line-height:1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1,h2,h3{ font-family: var(--font-display); font-weight:400; letter-spacing:0.02em; text-wrap: balance; margin:0; }
+  p{ margin:0; }
+  button{ font-family: inherit; }
+  a{ color: inherit; }
+  :focus-visible{ outline: 2px solid var(--c-brand-mid); outline-offset: 2px; border-radius: 4px; }
+
+  .app{
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+    min-height: 100vh;
+  }
+
+  /* ============ BRAND HEADER ============ */
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:11px;
+    margin-bottom: 34px;
+  }
+  .brand svg{ width:34px; height:34px; flex:none; }
+  .brand-name{ font-family: var(--font-display); font-size:17px; letter-spacing:0.08em; color: var(--c-brand-deep); line-height:1; }
+  .brand-name span{ color: var(--c-brand-mid); }
+  .brand-sub{ font-size:9px; letter-spacing:0.22em; text-transform:uppercase; color: var(--c-text-muted); margin-top:4px; }
+
+  .pulse-dot{ animation: pulse 2.4s ease-in-out infinite; transform-origin:center; }
+  @media (prefers-reduced-motion: reduce){ .pulse-dot{ animation:none; } }
+  @keyframes pulse{
+    0%,100%{ transform: scale(1); opacity:1; }
+    50%{ transform: scale(1.4); opacity:0.5; }
+  }
+
+  /* ============ SCREENS ============ */
+  .screen{ display:none; }
+  .screen.active{ display:block; animation: rise .5s ease both; }
+  @keyframes rise{ from{ opacity:0; transform: translateY(10px);} to{ opacity:1; transform:none; } }
+  @media (prefers-reduced-motion: reduce){ .screen.active{ animation:none; } }
+
+  /* ---- Intro ---- */
+  .intro-card{
+    background: var(--c-surface);
+    border:1px solid var(--c-border);
+    border-radius:20px;
+    padding:40px 32px;
+    box-shadow: var(--shadow-card);
+  }
+  .kicker{
+    display:inline-block;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color: var(--c-brand-mid);
+    background: var(--c-surface-alt);
+    padding:5px 12px;
+    border-radius:999px;
+    margin-bottom:18px;
+  }
+  h1.title{ font-size: clamp(32px,7.6vw,46px); color: var(--c-brand-deep); line-height:1.02; text-transform:uppercase; }
+  .subtitle{ margin-top:16px; font-size:16px; color: var(--c-text-muted); max-width: 48ch; font-weight:400; }
+  .authorline{
+    margin-top:20px; padding-top:18px; border-top:1px solid var(--c-border);
+    font-size:13px; color: var(--c-text-muted); line-height:1.55;
+  }
+  .authorline b{ color: var(--c-brand-deep); font-weight:700; }
+
+  .stat-row{ display:flex; gap:22px; margin-top:24px; padding-top:22px; border-top:1px solid var(--c-border); }
+  .stat{ display:flex; flex-direction:column; gap:2px; }
+  .stat b{ font-family: var(--font-display); font-size:24px; color: var(--c-brand-deep); font-variant-numeric: tabular-nums; letter-spacing:0.02em; }
+  .stat span{ font-size:11px; color: var(--c-text-muted); letter-spacing:0.03em; }
+
+  .field{ margin-top:28px; }
+  .field label{ display:block; font-size:13px; font-weight:600; color: var(--c-text); margin-bottom:8px; }
+  .field input{
+    width:100%;
+    font-family: var(--font-body);
+    font-size:16px;
+    padding:13px 16px;
+    border-radius:12px;
+    border:1.5px solid var(--c-border);
+    background: var(--c-surface-alt);
+    color: var(--c-text);
+  }
+  .field input:focus-visible{ outline-offset:0; border-color: var(--c-brand-mid); }
+  .field-hint{ font-size:12px; color: var(--c-text-muted); margin-top:6px; }
+  .field-grid{ display:flex; gap:10px; }
+  .field-grid input{ flex:1; min-width:0; }
+
+  .btn{
+    appearance:none;
+    border:none;
+    cursor:pointer;
+    font-family: var(--font-body);
+    font-weight:700;
+    font-size:14px;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+    border-radius:12px;
+    padding:15px 26px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+  }
+  .btn:active{ transform: scale(0.98); }
+  .btn-primary{ background: var(--c-brand-deep); color: var(--c-on-brand); width:100%; margin-top:26px; }
+  .btn-primary:hover{ box-shadow: 0 10px 24px -10px rgba(69,98,93,0.55); }
+  .btn-primary:disabled{ opacity:0.4; cursor:not-allowed; box-shadow:none; }
+  .btn-ghost{ background:transparent; color: var(--c-brand-deep); padding:12px 4px; text-transform:none; letter-spacing:0; font-weight:600; }
+  .btn-outline{ background:transparent; border:1.5px solid var(--c-border); color: var(--c-text); width:100%; }
+
+  /* ---- Progress ---- */
+  .progress{
+    display:flex;
+    gap:8px;
+    margin-bottom:28px;
+  }
+  .progress .seg{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+  .progress .bar{ height:5px; border-radius:999px; background: var(--c-surface-alt); overflow:hidden; }
+  .progress .bar i{ display:block; height:100%; width:0%; background: var(--c-brand-mid); border-radius:999px; transition: width .4s ease; }
+  .progress .seg.done .bar i{ width:100%; }
+  .progress .seg.current .bar i{ width:55%; background: var(--c-brand-deep); }
+  .progress .label{ font-size:10px; letter-spacing:0.05em; text-transform:uppercase; color: var(--c-text-muted); }
+  .progress .seg.current .label{ color: var(--c-brand-deep); font-weight:700; }
+
+  /* ---- Question screen ---- */
+  .q-card{
+    background: var(--c-surface);
+    border:1px solid var(--c-border);
+    border-radius:20px;
+    padding:32px;
+    box-shadow: var(--shadow-card);
+  }
+  .q-theme-label{ font-size:12px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color: var(--c-brand-mid); }
+  h2.q-theme-title{ font-size: clamp(26px,6.4vw,32px); color: var(--c-brand-deep); margin-top:6px; text-transform:uppercase; }
+  .q-theme-copy{ margin-top:12px; color: var(--c-text); font-size:14.5px; max-width:52ch; font-style:italic; border-left:3px solid var(--c-brand-pale); padding-left:12px; }
+
+  .questions{ margin-top:28px; display:flex; flex-direction:column; gap:24px; }
+  .question p{ font-size:16px; font-weight:600; margin-bottom:12px; line-height:1.45; }
+  .options{ display:flex; gap:8px; flex-wrap:wrap; }
+  .opt{
+    flex:1;
+    min-width: 96px;
+    background: var(--c-surface-alt);
+    border:1.5px solid transparent;
+    border-radius:11px;
+    padding:11px 8px;
+    font-size:13px;
+    font-weight:600;
+    color: var(--c-text-muted);
+    cursor:pointer;
+    text-align:center;
+    transition: all .15s ease;
+  }
+  .opt:hover{ border-color: var(--c-brand-pale); }
+  .opt[aria-pressed="true"]{
+    background: var(--c-brand-deep);
+    color: var(--c-on-brand);
+    border-color: var(--c-brand-deep);
+  }
+
+  .nav-row{ display:flex; gap:12px; margin-top:32px; align-items:center; }
+  .nav-row .btn-primary{ margin-top:0; flex:1; }
+
+  /* ---- Results ---- */
+  .results-head{ text-align:left; margin-bottom:28px; }
+  .results-head .kicker{ margin-bottom:14px; }
+  h2.results-title{ font-size: clamp(28px,6.4vw,36px); color: var(--c-brand-deep); text-transform:uppercase; }
+  .results-lede{ margin-top:12px; font-size:15px; color: var(--c-text-muted); max-width:54ch; }
+
+  .ekg-card{
+    background: var(--c-brand-deep);
+    border-radius:20px;
+    padding:26px 26px 20px;
+    color: var(--c-on-brand);
+    box-shadow: var(--shadow-card);
+    margin-bottom:22px;
+  }
+  .ekg-top{ display:flex; justify-content:space-between; align-items:flex-start; gap:12px; }
+  .ekg-score{ font-family: var(--font-display); font-size:48px; line-height:1; font-variant-numeric: tabular-nums; letter-spacing:0.02em; }
+  .ekg-score span{ display:block; font-family: var(--font-body); font-size:11px; letter-spacing:0.1em; text-transform:uppercase; opacity:0.75; margin-top:6px; }
+  .ekg-level{ text-align:right; font-family: var(--font-body); font-weight:800; font-size:15px; max-width: 170px; }
+  .ekg-svg{ width:100%; height:56px; margin-top:14px; display:block; }
+  .ekg-svg path{ fill:none; stroke: var(--c-brand-pale); stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round; }
+  .ekg-svg path.draw{ stroke-dasharray: 400; stroke-dashoffset:400; animation: draw 1.6s ease forwards .2s; }
+  @media (prefers-reduced-motion: reduce){ .ekg-svg path.draw{ animation:none; stroke-dashoffset:0; } }
+  @keyframes draw{ to{ stroke-dashoffset:0; } }
+
+  .vitals{ display:flex; flex-direction:column; gap:10px; margin-bottom:22px; }
+  .vital{
+    background: var(--c-surface);
+    border:1px solid var(--c-border);
+    border-radius:16px;
+    padding:18px 20px;
+  }
+  .vital-top{ display:flex; justify-content:space-between; align-items:center; gap:10px; }
+  .vital-name{ font-weight:700; font-size:14px; }
+  .pill{ font-size:10px; font-weight:800; letter-spacing:0.06em; text-transform:uppercase; padding:4px 10px; border-radius:999px; white-space:nowrap; }
+  .pill.debil{ background: var(--c-warn-soft); color: var(--c-warn); }
+  .pill.proceso{ background: var(--c-brand-pale); color: var(--c-brand-deep); }
+  .pill.fuerte{ background: var(--c-brand-deep); color: var(--c-on-brand); }
+  .vital-bar{ height:6px; border-radius:999px; background: var(--c-surface-alt); margin-top:12px; overflow:hidden; }
+  .vital-bar i{ display:block; height:100%; border-radius:999px; }
+  .vital-bar i.debil{ background: var(--c-warn); }
+  .vital-bar i.proceso{ background: var(--c-brand-mid); }
+  .vital-bar i.fuerte{ background: var(--c-brand-deep); }
+  .vital-copy{ margin-top:10px; font-size:13px; color: var(--c-text-muted); line-height:1.5; }
+
+  /* ---- Lectura de Kleyi ---- */
+  .read-card{
+    background: var(--c-surface-alt);
+    border-radius:16px;
+    padding:24px 22px;
+    margin-bottom:22px;
+    border-left:4px solid var(--c-brand-mid);
+  }
+  .read-head{ display:flex; align-items:center; gap:10px; margin-bottom:12px; }
+  .read-avatar{
+    width:34px;height:34px;border-radius:50%;flex:none;
+    background: var(--c-brand-deep); color: var(--c-on-brand);
+    display:flex;align-items:center;justify-content:center;
+    font-family: var(--font-display); font-size:15px; letter-spacing:0.02em;
+  }
+  .read-name{ font-weight:700; font-size:13px; color: var(--c-text); line-height:1.2; }
+  .read-role{ font-size:10.5px; letter-spacing:0.06em; text-transform:uppercase; color: var(--c-text-muted); margin-top:2px; }
+  .read-body{ font-size:14px; color: var(--c-text); line-height:1.6; }
+  .read-sign{ margin-top:12px; font-size:12.5px; color: var(--c-brand-deep); font-weight:600; }
+
+  .action-card{
+    background: var(--c-surface);
+    border:1px solid var(--c-border);
+    border-radius:16px;
+    padding:22px 20px;
+    margin-bottom:22px;
+  }
+  .action-card h3{ font-family: var(--font-body); font-size:12px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; color: var(--c-brand-deep); margin-bottom:14px; }
+  .action-card ol{ margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:12px; }
+  .action-card li{ display:flex; gap:12px; font-size:14px; align-items:flex-start; line-height:1.5; }
+  .action-num{ font-family: var(--font-display); font-size:20px; color: var(--c-brand-mid); flex:none; width:24px; letter-spacing:0.02em; }
+
+  .cta-card{
+    background: var(--c-brand-deep);
+    border-radius:20px;
+    padding:28px 26px 24px;
+    color: var(--c-on-brand);
+    margin-bottom:16px;
+  }
+  .cta-card h3{ font-family: var(--font-display); font-size:24px; font-weight:400; letter-spacing:0.02em; text-transform:uppercase; }
+  .cta-card p{ margin-top:10px; font-size:14px; opacity:0.88; max-width: 48ch; line-height:1.55; }
+  .cta-card .btn-primary{ background: var(--c-on-brand); color: var(--c-brand-deep); }
+  .cta-endorse{ margin-top:14px; font-size:11px; letter-spacing:0.06em; text-transform:uppercase; opacity:0.7; }
+
+  .print-btn-wrap{ display:flex; justify-content:center; margin-top:6px; }
+  .btn-ghost.print-btn{ display:inline-flex; gap:8px; align-items:center; }
+
+  .restart{ text-align:center; margin-top:18px; }
+
+  footer.credit{
+    margin-top:44px;
+    text-align:center;
+    font-size:11px;
+    color: var(--c-text-muted);
+    letter-spacing:0.04em;
+    line-height:1.7;
+  }
+  footer.credit b{ color: var(--c-brand-deep); font-weight:700; }
+
+  /* ============ PDF / PRINT REPORT ============ */
+  #print-report{ display:none; }
+  .pr{ font-family: var(--font-body); color:#2C3E35; }
+  .pr-strip{ background:#45625D; color:#fff; padding:12px 18px; border-radius:10px; display:flex; align-items:center; justify-content:space-between; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .pr-brand{ display:flex; align-items:center; gap:10px; }
+  .pr-brand svg{ width:26px; height:26px; }
+  .pr-bname{ font-family:var(--font-display); font-size:15px; letter-spacing:0.08em; line-height:1; }
+  .pr-bname span{ opacity:.85; }
+  .pr-bsub{ font-size:8px; letter-spacing:0.2em; text-transform:uppercase; opacity:.85; margin-top:3px; }
+  .pr-date{ font-size:9px; letter-spacing:0.06em; text-transform:uppercase; opacity:.85; text-align:right; line-height:1.5; }
+  .pr-kicker{ display:inline-block; margin-top:14px; font-size:10px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#6AA5A9; }
+  .pr-title{ font-family:var(--font-display); font-size:30px; color:#45625D; text-transform:uppercase; line-height:1.02; margin-top:6px; }
+  .pr-for{ margin-top:8px; font-size:13px; color:#5C716B; }
+  .pr-for b{ color:#45625D; }
+  .pr-scorebox{ margin-top:12px; background:#EAEAEA; border-radius:12px; padding:13px 18px; display:flex; align-items:center; gap:22px; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .pr-score{ font-family:var(--font-display); font-size:44px; color:#45625D; line-height:1; flex:none; }
+  .pr-score small{ display:block; font-family:var(--font-body); font-size:9px; letter-spacing:0.1em; text-transform:uppercase; color:#5C716B; margin-top:5px; }
+  .pr-level{ font-weight:800; font-size:15px; color:#45625D; }
+  .pr-lede{ font-size:11.5px; color:#5C716B; margin-top:5px; line-height:1.5; }
+  .pr-sec{ margin-top:14px; }
+  .pr-h2{ font-family:var(--font-display); font-size:15px; letter-spacing:0.04em; text-transform:uppercase; color:#45625D; margin-bottom:10px; border-bottom:2px solid #A3D2D5; padding-bottom:5px; }
+  .pr-areas{ display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .pr-area{ border:1px solid rgba(44,62,53,.14); border-radius:9px; padding:10px 12px; }
+  .pr-area-top{ display:flex; justify-content:space-between; align-items:center; gap:8px; }
+  .pr-area-name{ font-weight:700; font-size:12px; }
+  .pr-pill{ font-size:8px; font-weight:800; letter-spacing:0.05em; text-transform:uppercase; padding:3px 8px; border-radius:999px; white-space:nowrap; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .pr-pill.debil{ background:#EEDFCB; color:#B07A45; }
+  .pr-pill.proceso{ background:#A3D2D5; color:#45625D; }
+  .pr-pill.fuerte{ background:#45625D; color:#fff; }
+  .pr-area-copy{ font-size:10.5px; color:#5C716B; margin-top:6px; line-height:1.42; }
+  .pr-read{ font-size:11.5px; color:#2C3E35; line-height:1.5; background:#EAEAEA; border-left:4px solid #6AA5A9; padding:12px 14px; border-radius:8px; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .pr-read b{ color:#45625D; }
+  .pr-plan{ margin-top:14px; background:#45625D; color:#fff; border-radius:12px; padding:20px 22px; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .pr-plan-k{ font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#A3D2D5; font-weight:700; }
+  .pr-plan-h{ font-family:var(--font-display); font-size:20px; text-transform:uppercase; margin-top:4px; line-height:1.1; }
+  .pr-steps{ margin:12px 0 0; padding:0; list-style:none; display:flex; flex-direction:column; gap:8px; }
+  .pr-steps li{ display:flex; gap:12px; font-size:12.5px; line-height:1.45; align-items:flex-start; }
+  .pr-num{ font-family:var(--font-display); font-size:18px; color:#A3D2D5; width:20px; flex:none; }
+  .pr-cta{ margin-top:14px; text-align:center; font-size:12px; color:#45625D; }
+  .pr-cta b{ font-weight:800; }
+  .pr-foot{ margin-top:12px; border-top:1px solid rgba(44,62,53,.14); padding-top:8px; text-align:center; font-size:9px; letter-spacing:0.05em; color:#5C716B; }
+
+  @media print{
+    @page{ size:A4; margin:12mm; }
+    body{ background:#fff; }
+    .app{ display:none !important; }
+    #print-report{ display:block !important; }
+    .pr-plan, .pr-areas, .pr-read, .pr-scorebox{ break-inside:avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <div class="brand">
+    <svg viewBox="0 0 120 120" aria-hidden="true">
+      <circle class="pulse-dot" cx="60" cy="14" r="6" fill="var(--c-brand-mid)"/>
+      <g stroke-linecap="round">
+        <line x1="60" y1="60" x2="60" y2="24" stroke="var(--c-brand-deep)" stroke-width="15"/>
+        <line x1="60" y1="60" x2="30" y2="34" stroke="var(--c-brand-deep)" stroke-width="15"/>
+        <line x1="60" y1="60" x2="90" y2="34" stroke="var(--c-brand-deep)" stroke-width="15"/>
+        <line x1="14" y1="60" x2="106" y2="60" stroke="var(--c-brand-deep)" stroke-width="15"/>
+        <line x1="60" y1="60" x2="30" y2="86" stroke="var(--c-brand-mid)" stroke-width="15"/>
+        <line x1="60" y1="60" x2="90" y2="86" stroke="var(--c-brand-mid)" stroke-width="15"/>
+        <line x1="60" y1="60" x2="60" y2="108" stroke="var(--c-brand-mid)" stroke-width="15"/>
+      </g>
+    </svg>
+    <div>
+      <div class="brand-name">KLEYI <span>ELIMAR</span></div>
+      <div class="brand-sub">Consultoría de Negocios</div>
+    </div>
+  </div>
+
+  <!-- ================= INTRO ================= -->
+  <section class="screen active" id="screen-intro">
+    <div class="intro-card">
+      <span class="kicker">Diagnóstico gratuito</span>
+      <h1 class="title">Midamos el Pulso de tu Negocio</h1>
+      <p class="subtitle">4 áreas. 16 preguntas para pensar con calma. Al final, una lectura clara de cómo está tu negocio hoy y por dónde conviene empezar a poner orden.</p>
+
+      <div class="authorline">
+        Te acompaña <b>Kleyi Elimar</b>, Administradora de Empresas, Consultora y Mentora. No vengo a prometerte fórmulas mágicas: vengo a ayudarte a ver tu negocio con claridad y a decidir con criterio.
+      </div>
+
+      <div class="stat-row">
+        <div class="stat"><b>16</b><span>Preguntas</span></div>
+        <div class="stat"><b>4 min</b><span>Duración</span></div>
+        <div class="stat"><b>4</b><span>Áreas medidas</span></div>
+      </div>
+
+      <div class="field">
+        <label for="input-name">¿Cómo te llamas?</label>
+        <div class="field-grid">
+          <input id="input-name" type="text" placeholder="Nombre" autocomplete="given-name">
+          <input id="input-last" type="text" placeholder="Apellido (opcional)" autocomplete="family-name">
+        </div>
+        <p class="field-hint">Lo usamos solo para personalizar tu lectura y tu PDF.</p>
+      </div>
+
+      <button class="btn btn-primary" id="btn-start">Tomar el Pulso →</button>
+    </div>
+  </section>
+
+  <!-- ================= QUESTION SCREENS (generated) ================= -->
+  <section class="screen" id="screen-questions">
+    <div class="progress" id="progress-row"></div>
+    <div class="q-card">
+      <span class="q-theme-label" id="q-label"></span>
+      <h2 class="q-theme-title" id="q-title"></h2>
+      <p class="q-theme-copy" id="q-copy"></p>
+      <div class="questions" id="q-list"></div>
+      <div class="nav-row">
+        <button class="btn btn-outline" id="btn-back" style="max-width:120px;">Atrás</button>
+        <button class="btn btn-primary" id="btn-next" disabled>Continuar</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= RESULTS ================= -->
+  <section class="screen" id="screen-results">
+    <div class="results-head">
+      <span class="kicker">Tu diagnóstico</span>
+      <h2 class="results-title" id="res-title">Este es tu Pulso Hoy</h2>
+      <p class="results-lede" id="res-lede"></p>
+    </div>
+
+    <div class="ekg-card">
+      <div class="ekg-top">
+        <div class="ekg-score" id="res-score">0<span>de 48 puntos</span></div>
+        <div class="ekg-level" id="res-level"></div>
+      </div>
+      <svg class="ekg-svg" viewBox="0 0 300 56" preserveAspectRatio="none" aria-hidden="true">
+        <path class="draw" d="M0,28 L60,28 L74,10 L90,46 L104,28 L300,28"/>
+      </svg>
+    </div>
+
+    <div class="vitals" id="res-vitals"></div>
+
+    <!-- La lectura de Kleyi -->
+    <div class="read-card">
+      <div class="read-head">
+        <div class="read-avatar">KE</div>
+        <div>
+          <div class="read-name">La lectura de Kleyi</div>
+          <div class="read-role">Administradora de Empresas · Consultora</div>
+        </div>
+      </div>
+      <p class="read-body" id="read-body"></p>
+      <p class="read-sign">— Kleyi Elimar</p>
+    </div>
+
+    <div class="action-card">
+      <h3 id="action-title">Tu Plan de Acción — Empieza Aquí</h3>
+      <ol id="action-list"></ol>
+    </div>
+
+    <div class="cta-card">
+      <h3>¿Lo resolvemos juntas, con acompañamiento?</h3>
+      <p id="cta-copy">Cada lunes recibirás una idea concreta para seguir cuidando el pulso de tu negocio. Y si quieres avanzar más rápido y con orden, agendemos una conversación estratégica.</p>
+      <a class="btn btn-primary" href="https://kleyielimar.com/servicios/" target="_blank" rel="noopener" style="text-decoration:none;">Agenda una Conversación Estratégica</a>
+      <div class="cta-endorse">por Kleyi Elimar · Consultoría de Negocios</div>
+    </div>
+
+    <div class="print-btn-wrap no-print">
+      <button class="btn btn-ghost print-btn" id="btn-print">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+        Descargar tu Diagnóstico en PDF
+      </button>
+    </div>
+    <div class="restart no-print">
+      <button class="btn btn-ghost" id="btn-restart">Volver a tomar el pulso</button>
+    </div>
+  </section>
+
+  <footer class="credit no-print">
+    <b>KLEYI ELIMAR</b> · Consultoría de Negocios<br>
+    kleyielimar.com &nbsp;·&nbsp; linkedin.com/in/kleyielimar
+  </footer>
+</div>
+
+<div id="print-report" aria-hidden="true"></div>
+
+<script>
+(function(){
+  "use strict";
+
+  var THEMES = [
+    {
+      key:'trabajo', label:'Cómo Trabajas', title:'Cómo Trabajas',
+      copy:'Un negocio sano puede seguir andando aunque tú no estés encima de todo el día.',
+      questions:[
+        'Si desaparecieras una semana sin avisar, ¿el negocio seguiría atendiendo a tus clientes igual de bien?',
+        '¿Podrías explicar tu semana de trabajo solo con lo que ya está escrito, sin tener que estar tú aclarando cada paso?',
+        'Al terminar el día, ¿sabes con certeza qué se hizo y qué quedó pendiente, sin reconstruirlo de memoria?',
+        '¿Tu semana la decide un sistema (agenda, tablero, prioridades) o la decide lo que va cayendo?'
+      ],
+      diag:{
+        debil:'Hoy el negocio funciona por tu esfuerzo, no por tu sistema. Eso no es sostenible: cuando todo pasa por ti, no tienes una empresa, tienes un empleo sin horario.',
+        proceso:'Ya tienes piezas de un sistema, pero todavía dependen de que tú las sostengas. El siguiente paso es conectarlas para que operen sin tu supervisión constante.',
+        fuerte:'Tu operación no depende de tu memoria ni de tu presencia. Esa es, literalmente, la base sobre la que se construye todo lo demás.'
+      },
+      actions:[
+        'Elige una tarea que repites cada semana y escribe su paso a paso, como para que otra persona la ejecute.',
+        'Define una sola herramienta (agenda o tablero) y planifica tu semana ahí, no en tu cabeza.',
+        'Identifica una tarea que hoy haces tú y que no requiere tu criterio: es tu primera candidata a soltar.'
+      ]
+    },
+    {
+      key:'dinero', label:'Tu Dinero', title:'Tu Dinero',
+      copy:'No puedes dirigir lo que no mides. Tus números son el tablero desde donde decides con la cabeza, no con los nervios.',
+      questions:[
+        '¿Podrías decir ahora mismo cuánto ganaste realmente el mes pasado, sin abrir el banco?',
+        '¿El dinero del negocio vive separado del tuyo, o todavía salen del mismo bolsillo?',
+        '¿Sabes cuál de tus productos o servicios te deja más ganancia real, no solo más ventas?',
+        'Cuando pones un precio, ¿parte de un margen que calculaste, o de lo que crees que la gente estaría dispuesta a pagar?'
+      ],
+      diag:{
+        debil:'Estás decidiendo a ciegas. Sin números claros, cada decisión de precio, gasto o inversión es una apuesta, no una estrategia.',
+        proceso:'Tienes algo de control, pero quedan zonas grises en tus finanzas. Cerrarlas es lo que convierte "creo que voy bien" en "sé exactamente cómo voy".',
+        fuerte:'Conoces tus números y eso te da poder real: decides con datos. Es la diferencia entre dirigir tu negocio y perseguirlo.'
+      },
+      actions:[
+        'Si aún no la tienes, abre una cuenta separada solo para el negocio. Es el primer límite sano.',
+        'Registra durante esta semana todo lo que entra y todo lo que sale, sin excepción.',
+        'Calcula el margen real de tu producto o servicio principal: precio menos lo que cuesta entregarlo.'
+      ]
+    },
+    {
+      key:'equipo', label:'Tu Equipo', title:'Delegación y Equipo',
+      copy:'Delegar no es soltar el control; es dejar de ser el cuello de botella de tu propio negocio.',
+      questions:[
+        '¿Hay alguien, además de ti, que pueda tomar una decisión importante sin frenarse a preguntarte primero?',
+        'Cuando delegas, ¿entregas la tarea completa, o sigues revisando cada pedazo por si acaso?',
+        'Lo que sabes hacer, ¿vive escrito en algún lado, o solo en tu cabeza?',
+        'Si hoy entrara una persona nueva, ¿tendría de dónde aprender, o dependería de que tú tengas tiempo de enseñarle todo?'
+      ],
+      diag:{
+        debil:'Eres el cuello de botella de tu negocio. Nada avanza sin ti, y eso pone un techo a cuánto puedes crecer: solo hasta donde alcancen tus horas.',
+        proceso:'Ya delegas algunas cosas, pero sigues siendo indispensable en lo importante. Delegar decisiones, no solo tareas, es el salto que falta.',
+        fuerte:'Tu equipo puede sostener el negocio sin que tú estés en cada detalle. Eso no es perder control: es haberlo construido bien.'
+      },
+      actions:[
+        'Escribe el proceso de una tarea que hoy solo tú sabes hacer. Documentar es el primer paso para delegar.',
+        'Delega una tarea completa esta semana —de principio a fin—, no solo un pedazo que luego revisas.',
+        'Define quién puede decidir qué sin consultarte. Poner ese límite claro libera tu tiempo y su iniciativa.'
+      ]
+    },
+    {
+      key:'clientes', label:'Tus Clientes', title:'Clientes y Ventas',
+      copy:'Vender con dirección no es cuestión de suerte; es saber de dónde viene tu próxima venta antes de que llegue.',
+      questions:[
+        '¿Sabes de dónde va a salir tu próxima venta, o esperas a ver qué llega este mes?',
+        'Cuando alguien pregunta pero no compra, ¿tienes una forma de darle seguimiento, o ahí termina la conversación?',
+        '¿Publicas y ofreces con un plan, o según cómo amaneciste ese día?',
+        '¿Sabes cuántos clientes necesitas este mes para llegar a tu meta, con un número exacto?'
+      ],
+      diag:{
+        debil:'Tu negocio no crece, sobrevive. Sin un sistema de ventas, cada mes empieza de cero y dependes de que "algo caiga".',
+        proceso:'Tienes movimiento, pero todavía improvisas más de lo que planeas. Ordenar el seguimiento es donde están las ventas que hoy se te escapan.',
+        fuerte:'Vendes con dirección, no con suerte. Sabes de dónde vienen tus clientes y qué hacer para atraer más. Así se construye crecimiento real.'
+      },
+      actions:[
+        'Anota de dónde vino cada cliente que te compró este mes. Ahí verás qué fuente repetir.',
+        'Escribe un mensaje simple y reutilizable para dar seguimiento a quien preguntó y no compró.',
+        'Define con un número exacto cuántos clientes necesitas este mes para llegar a tu meta.'
+      ]
+    }
+  ];
+
+  var OPTIONS = [
+    {label:'Nunca', value:1},
+    {label:'A veces', value:2},
+    {label:'Casi siempre', value:3}
+  ];
+
+  var OVERALL = {
+    apagafuegos:{
+      label:'Modo Apagafuegos',
+      lede:'Hoy resuelves lo urgente y lo importante queda para después. Es el punto de partida de la mayoría de los negocios que ya venden: se ordena, no se reinventa.',
+      read:'Lo que veo aquí es un negocio que funciona por tu esfuerzo y tu memoria, no por un sistema. Es muchísimo más común de lo que crees, y tiene solución. El error sería intentar arreglar diez cosas a la vez. Se empieza por una sola área —la más débil— y se ordena bien antes de pasar a la siguiente. Ese orden es justo lo que te quita gran parte del estrés, y es en lo que te puedo acompañar paso a paso.'
+    },
+    transicion:{
+      label:'En Transición',
+      lede:'Ya dejaste atrás el caos total. Ahora el reto no es empezar de nuevo, sino hacer sostenible lo que ya construiste.',
+      read:'Estás en un punto interesante: ya no improvisas todo, pero el sistema todavía te necesita para sostenerse. Aquí el trabajo no es hacer más cosas, es hacer las correctas en el orden correcto —cerrar las zonas grises antes de sumar nada nuevo. Con la estructura adecuada, este negocio deja de depender de tu energía del día. Es exactamente el tipo de etapa que me gusta acompañar.'
+    },
+    organizado:{
+      label:'Negocio Organizado',
+      lede:'Tienes las bases de una empresa real: mides, delegas y vendes con dirección. El siguiente nivel es afinar el sistema para crecer con control.',
+      read:'Se nota que has trabajado en tu negocio, no solo dentro de él. Tienes bases sólidas, y eso cambia por completo la conversación: aquí ya no hablamos de ordenar el caos, sino de afinar y escalar sin perder el control que tanto te costó construir. Ese siguiente nivel —crecer con estructura— es donde una mirada externa y un acompañamiento estratégico marcan la diferencia.'
+    }
+  };
+
+  var state = {
+    themeIndex: 0,
+    answers: {},
+    name: '',
+    last: ''
+  };
+  function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+  THEMES.forEach(function(t){ state.answers[t.key] = [null,null,null,null]; });
+
+  var $ = function(id){ return document.getElementById(id); };
+
+  function showScreen(id){
+    document.querySelectorAll('.screen').forEach(function(s){ s.classList.remove('active'); });
+    $(id).classList.add('active');
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  // ---------- INTRO ----------
+  // Prefill nombre/apellido desde la URL (p. ej. redirección de Systeme.io)
+  (function prefill(){
+    try{
+      var p = new URLSearchParams(window.location.search);
+      var n = p.get('nombre') || p.get('name') || p.get('first_name') || '';
+      var l = p.get('apellido') || p.get('last') || p.get('last_name') || '';
+      if(n) $('input-name').value = n;
+      if(l) $('input-last').value = l;
+    }catch(e){}
+  })();
+
+  function enterStart(e){ if(e.key === 'Enter'){ $('btn-start').click(); } }
+  $('btn-start').addEventListener('click', function(){
+    state.name = $('input-name').value.trim();
+    state.last = $('input-last').value.trim();
+    state.themeIndex = 0;
+    renderQuestionScreen();
+    showScreen('screen-questions');
+  });
+  $('input-name').addEventListener('keydown', enterStart);
+  $('input-last').addEventListener('keydown', enterStart);
+
+  // ---------- PROGRESS ----------
+  function renderProgress(){
+    var row = $('progress-row');
+    row.innerHTML = '';
+    THEMES.forEach(function(t, i){
+      var seg = document.createElement('div');
+      seg.className = 'seg' + (i < state.themeIndex ? ' done' : i === state.themeIndex ? ' current' : '');
+      seg.innerHTML = '<div class="bar"><i></i></div><div class="label">' + t.label + '</div>';
+      row.appendChild(seg);
+    });
+  }
+
+  // ---------- QUESTIONS ----------
+  function renderQuestionScreen(){
+    var t = THEMES[state.themeIndex];
+    renderProgress();
+    $('q-label').textContent = 'Área ' + (state.themeIndex + 1) + ' de ' + THEMES.length;
+    $('q-title').textContent = t.title;
+    $('q-copy').textContent = t.copy;
+
+    var list = $('q-list');
+    list.innerHTML = '';
+    t.questions.forEach(function(qText, qi){
+      var wrap = document.createElement('div');
+      wrap.className = 'question';
+      var p = document.createElement('p');
+      p.textContent = qText;
+      wrap.appendChild(p);
+
+      var opts = document.createElement('div');
+      opts.className = 'options';
+      OPTIONS.forEach(function(opt){
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'opt';
+        b.textContent = opt.label;
+        b.setAttribute('aria-pressed', state.answers[t.key][qi] === opt.value ? 'true' : 'false');
+        b.addEventListener('click', function(){
+          state.answers[t.key][qi] = opt.value;
+          Array.prototype.forEach.call(opts.children, function(sib, si){
+            sib.setAttribute('aria-pressed', si === OPTIONS.indexOf(opt) ? 'true' : 'false');
+          });
+          updateNextState();
+        });
+        opts.appendChild(b);
+      });
+      wrap.appendChild(opts);
+      list.appendChild(wrap);
+    });
+
+    $('btn-back').style.visibility = state.themeIndex === 0 ? 'hidden' : 'visible';
+    updateNextState();
+  }
+
+  function updateNextState(){
+    var t = THEMES[state.themeIndex];
+    var answered = state.answers[t.key].every(function(v){ return v !== null; });
+    $('btn-next').disabled = !answered;
+    $('btn-next').textContent = state.themeIndex === THEMES.length - 1 ? 'Ver mi Diagnóstico →' : 'Continuar';
+  }
+
+  $('btn-back').addEventListener('click', function(){
+    if(state.themeIndex === 0) return;
+    state.themeIndex -= 1;
+    renderQuestionScreen();
+  });
+
+  $('btn-next').addEventListener('click', function(){
+    if(state.themeIndex < THEMES.length - 1){
+      state.themeIndex += 1;
+      renderQuestionScreen();
+    } else {
+      renderResults();
+      showScreen('screen-results');
+    }
+  });
+
+  // ---------- SCORING ----------
+  function scoreOf(key){
+    return state.answers[key].reduce(function(a,b){ return a + b; }, 0);
+  }
+  function statusOf(score){
+    if(score <= 6) return 'debil';
+    if(score <= 9) return 'proceso';
+    return 'fuerte';
+  }
+  var STATUS_LABEL = {debil:'Por ordenar', proceso:'En proceso', fuerte:'Fuerte'};
+
+  function renderResults(){
+    var scores = THEMES.map(function(t){ return {theme:t, score:scoreOf(t.key)}; });
+    var total = scores.reduce(function(a,s){ return a + s.score; }, 0);
+
+    var overallKey = total <= 26 ? 'apagafuegos' : total <= 37 ? 'transicion' : 'organizado';
+    var overall = OVERALL[overallKey];
+
+    $('res-title').textContent = state.name ? 'El Pulso de ' + state.name + ' Hoy' : 'Este es el Pulso de tu Negocio Hoy';
+    $('res-lede').textContent = overall.lede;
+    $('res-score').childNodes[0].nodeValue = total;
+    $('res-level').textContent = overall.label;
+
+    var ekgColor = overallKey === 'apagafuegos' ? 'var(--c-warn)' : 'var(--c-brand-pale)';
+    document.querySelector('.ekg-svg path').setAttribute('stroke', ekgColor);
+
+    var vitalsEl = $('res-vitals');
+    vitalsEl.innerHTML = '';
+    var weakest = scores[0];
+    scores.forEach(function(s){
+      if(s.score < weakest.score) weakest = s;
+      var status = statusOf(s.score);
+      var el = document.createElement('div');
+      el.className = 'vital';
+      el.innerHTML =
+        '<div class="vital-top">' +
+          '<span class="vital-name">' + s.theme.title + '</span>' +
+          '<span class="pill ' + status + '">' + STATUS_LABEL[status] + '</span>' +
+        '</div>' +
+        '<div class="vital-bar"><i class="' + status + '" style="width:' + Math.round((s.score/12)*100) + '%"></i></div>' +
+        '<p class="vital-copy">' + s.theme.diag[status] + '</p>';
+      vitalsEl.appendChild(el);
+    });
+
+    // Lectura de Kleyi — personalizada por nivel y por área más débil
+    var readText = overall.read;
+    if(state.name){
+      readText = state.name + ', ' + readText.charAt(0).toLowerCase() + readText.slice(1);
+    }
+    $('read-body').textContent = readText + ' Empezaría por tu área más floja hoy: ' + weakest.theme.title.toLowerCase() + '.';
+
+    $('action-title').textContent = 'Tu Plan de Acción — Empieza por: ' + weakest.theme.title;
+    var actionsEl = $('action-list');
+    actionsEl.innerHTML = '';
+    weakest.theme.actions.forEach(function(a, i){
+      var li = document.createElement('li');
+      li.innerHTML = '<span class="action-num">' + (i+1) + '</span><span>' + a + '</span>';
+      actionsEl.appendChild(li);
+    });
+
+    buildPrintReport({scores:scores, total:total, overall:overall, weakest:weakest});
+  }
+
+  // ---------- PDF REPORT ----------
+  function buildPrintReport(ctx){
+    var full = (state.name + (state.last ? ' ' + state.last : '')).trim();
+    var forLine = full ? 'Preparado para <b>' + esc(full) + '</b>' : 'Tu diagnóstico personalizado';
+    var meses = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+    var d = new Date();
+    var fecha = d.getDate() + ' de ' + meses[d.getMonth()] + ' de ' + d.getFullYear();
+
+    var areasHtml = ctx.scores.map(function(s){
+      var st = statusOf(s.score);
+      return '<div class="pr-area"><div class="pr-area-top"><span class="pr-area-name">' + s.theme.title +
+        '</span><span class="pr-pill ' + st + '">' + STATUS_LABEL[st] + '</span></div>' +
+        '<p class="pr-area-copy">' + s.theme.diag[st] + '</p></div>';
+    }).join('');
+
+    var stepsHtml = ctx.weakest.theme.actions.map(function(a, i){
+      return '<li><span class="pr-num">' + (i+1) + '</span><span>' + a + '</span></li>';
+    }).join('');
+
+    var readText = ctx.overall.read;
+    if(state.name){ readText = esc(state.name) + ', ' + readText.charAt(0).toLowerCase() + readText.slice(1); }
+    readText += ' Empezaría por tu área más floja hoy: ' + ctx.weakest.theme.title.toLowerCase() + '.';
+
+    var logo = document.querySelector('.brand svg').outerHTML;
+
+    document.getElementById('print-report').innerHTML =
+      '<div class="pr">' +
+        '<div class="pr-strip"><div class="pr-brand">' + logo +
+          '<div><div class="pr-bname">KLEYI <span>ELIMAR</span></div><div class="pr-bsub">Consultoría de Negocios</div></div>' +
+        '</div><div class="pr-date">Diagnóstico<br>' + fecha + '</div></div>' +
+        '<div class="pr-kicker">Diagnóstico gratuito</div>' +
+        '<h1 class="pr-title">El Pulso de tu Negocio</h1>' +
+        '<p class="pr-for">' + forLine + '</p>' +
+        '<div class="pr-scorebox"><div class="pr-score">' + ctx.total + '<small>de 48 puntos</small></div>' +
+          '<div><div class="pr-level">' + ctx.overall.label + '</div><p class="pr-lede">' + ctx.overall.lede + '</p></div></div>' +
+        '<div class="pr-sec"><div class="pr-h2">Tus 4 áreas hoy</div><div class="pr-areas">' + areasHtml + '</div></div>' +
+        '<div class="pr-sec"><div class="pr-h2">La lectura de Kleyi</div><p class="pr-read">' + readText +
+          '<br><br><b>— Kleyi Elimar, Administradora de Empresas</b></p></div>' +
+        '<div class="pr-plan"><div class="pr-plan-k">Tu plan de acción · empieza aquí</div>' +
+          '<div class="pr-plan-h">Empieza por: ' + ctx.weakest.theme.title + '</div>' +
+          '<ol class="pr-steps">' + stepsHtml + '</ol></div>' +
+        '<p class="pr-cta"><b>¿Lo resolvemos juntas?</b> Agenda una conversación estratégica en kleyielimar.com/servicios</p>' +
+        '<div class="pr-foot">KLEYI ELIMAR · Consultoría de Negocios · kleyielimar.com · linkedin.com/in/kleyielimar</div>' +
+      '</div>';
+  }
+
+  $('btn-print').addEventListener('click', function(){ window.print(); });
+
+  $('btn-restart').addEventListener('click', function(){
+    THEMES.forEach(function(t){ state.answers[t.key] = [null,null,null,null]; });
+    state.themeIndex = 0;
+    $('input-name').value = state.name;
+    $('input-last').value = state.last;
+    showScreen('screen-intro');
+  });
+
+})();
+</script>
+</body>
+</html>
